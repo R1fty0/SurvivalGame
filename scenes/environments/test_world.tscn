@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://l0ejq0v4xxwo"]
+
+[ext_resource type="Texture2D" uid="uid://boyn61ko4qt8r" path="res://addons/kenney_prototype_textures/green/texture_09.png" id="1_lfytl"]
+[ext_resource type="PackedScene" uid="uid://cq5ue46afuqbt" path="res://scenes/prefabs/player/player.tscn" id="2_wriv7"]
+[ext_resource type="PackedScene" uid="uid://cqa8e7emwfjax" path="res://scenes/ui_elements/debug_panel.tscn" id="3_xd5i0"]
+[ext_resource type="Script" path="res://scripts/inventory_manager.gd" id="4_qs7my"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u461h"]
+
+[sub_resource type="Sky" id="Sky_v7l70"]
+sky_material = SubResource("ProceduralSkyMaterial_u461h")
+
+[sub_resource type="Environment" id="Environment_6nxxf"]
+background_mode = 2
+sky = SubResource("Sky_v7l70")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhaqb"]
+albedo_texture = ExtResource("1_lfytl")
+uv1_triplanar = true
+uv2_triplanar = true
+
+[node name="TestWorld" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6nxxf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Ground" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(20, 0.2, 20)
+material = SubResource("StandardMaterial3D_dhaqb")
+
+[node name="Player" parent="." instance=ExtResource("2_wriv7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+camera_sens = 22.0
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DebugPanel" parent="UserInterface" instance=ExtResource("3_xd5i0")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 200.0
+offset_bottom = 40.0
+
+[node name="InventoryManager" type="Node3D" parent="."]
+script = ExtResource("4_qs7my")

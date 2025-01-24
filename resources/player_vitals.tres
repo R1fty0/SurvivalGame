@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerVitals" load_steps=2 format=3 uid="uid://dd5b3cf5vioqt"]
+
+[ext_resource type="Script" path="res://scripts/player_vitals.gd" id="1_dhr6a"]
+
+[resource]
+script = ExtResource("1_dhr6a")
+health = 100.0
+hunger = 100.0
+thirst = 100.0
+stamina = 100.0
